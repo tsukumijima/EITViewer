@@ -4,3 +4,4 @@ EITViewer.exe
 EITViewer.js
 *.txt
 *.log
+!License.txt
