@@ -1,4 +1,6 @@
 node_modules/
+EITViewer
+EITViewer.exe
 EITViewer.js
 *.txt
 *.log
