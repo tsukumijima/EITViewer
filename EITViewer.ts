@@ -40,9 +40,9 @@ dayjs.tz.setDefault('Asia/Tokyo');
 const program = new Command();
 program.requiredOption('--input <path>', '入力の TS ファイルのパス');
 program.option('--output-log <path>', '出力するログファイルのパス (省略時は stdout に出力)');
+program.option('--eit-types <eit_types>', '絞り込む EIT のタイプ (コンマ区切り、present/following/schedule から選択)');
 program.option('--service-ids <service_ids>', '絞り込むサービス ID のリスト (コンマ区切り)');
 program.option('--event-ids <event_ids>', '絞り込むイベント ID のリスト (コンマ区切り)');
-program.option('--eit-types <eit_types>', '絞り込む EIT のタイプ (コンマ区切り、present/following/schedule から選択)');
 program.parse(process.argv);
 const options = program.opts();
 
@@ -50,6 +50,12 @@ const options = program.opts();
 let logger = console;
 if ('outputLog' in options) {
     logger = new console.Console(fs.createWriteStream(options.outputLog));
+}
+
+// 絞り込む EIT のタイプ
+let filterEitTypes: string[] = [];
+if ('eitTypes' in options) {
+    filterEitTypes = options.eitTypes.split(',');
 }
 
 // 絞り込むサービス ID のリスト
@@ -62,12 +68,6 @@ if ('serviceIds' in options) {
 let filterEventIds: number[] = [];
 if ('eventIds' in options) {
     filterEventIds = options.eventIds.split(',').map((value: string) => parseInt(value));
-}
-
-// 絞り込む EIT のタイプ
-let filterEitTypes: string[] = [];
-if ('eitTypes' in options) {
-    filterEitTypes = options.eitTypes.split(',');
 }
 
 
