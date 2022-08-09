@@ -7,6 +7,9 @@
     "build-nexe-windows": "nexe -t windows-x64-10.16.0 EITViewer.js",
     "build-nexe-linux": "nexe -t linux-x64-10.16.0 EITViewer.js"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@chinachu/aribts": "^1.3.5-mirakurun.18",
     "commander": "^9.4.0",
